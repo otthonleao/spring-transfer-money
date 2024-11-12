@@ -58,4 +58,21 @@ public class WalletType {
                 ", description='" + description + '\'' +
                 '}';
     }
+
+    public enum Enum {
+        CUSTOMER_PF(1L, "Pessoa Física"),
+        CUSTOMER_PJ(2L, "Pessoa Jurídica");
+
+        private long id;
+        private String description;
+
+        Enum(long id, String description) {
+            this.id = id;
+            this.description = description;
+        }
+
+        public WalletType get() {
+            return new WalletType(id, description);
+        }
+    }
 }
