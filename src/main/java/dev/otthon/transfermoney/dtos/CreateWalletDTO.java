@@ -2,15 +2,27 @@ package dev.otthon.transfermoney.dtos;
 
 import dev.otthon.transfermoney.entities.Wallet;
 import dev.otthon.transfermoney.entities.WalletType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.BeanUtils;
 
 public class CreateWalletDTO {
 
     private Long id;
+
+    @NotBlank
     private String fullName;
+
+    @NotBlank
     private String cpfCnpj;
+
+    @NotBlank
     private String email;
+
+    @NotBlank
     private String password;
+
+    @NotNull
     private WalletType walletType;
 
     public CreateWalletDTO() {

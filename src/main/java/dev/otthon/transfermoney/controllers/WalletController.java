@@ -2,6 +2,7 @@ package dev.otthon.transfermoney.controllers;
 
 import dev.otthon.transfermoney.dtos.CreateWalletDTO;
 import dev.otthon.transfermoney.services.WalletService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class WalletController {
     private WalletService walletService;
 
     @PostMapping("/wallet")
-    public ResponseEntity<CreateWalletDTO> createWallet(@RequestBody CreateWalletDTO dto) {
+    public ResponseEntity<CreateWalletDTO> createWallet(@Valid @RequestBody CreateWalletDTO dto) {
         dto = walletService.createWallet(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
