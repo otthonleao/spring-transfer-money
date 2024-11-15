@@ -20,23 +20,26 @@ services:
           cpus: "0.5"     # Limita o uso de CPU a 50%
           memory: "512M"  # Limita a memória a 512 MB
 
-  # GERENCIADOR DE DATABASE ALTERNATIVO AO PGADMIN4
-  adminer:
-    image: adminer:latest
-    container_name: dev-adminer
-    ports:
-      - "5050:8080"
-    depends_on:
-      - database
-    environment:
-      ADMINER_DEFAULT_SERVER: database # Define o servidor de banco de dados padrão
-    networks:
-      - dev-network
-    deploy:
-      resources:
-        limits:
-          cpus: "0.2"     # Limita o uso de CPU a 20% de um núcleo
-          memory: "128M"  # Limita a memória a 128 MB
+  # PGADMIN
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    container_name: dev-pgadmin
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: me@example.com
+#      PGADMIN_DEFAULT_PASSWORD: senha123
+#    ports:
+#      - "5050:80"
+#    volumes:
+#      - pgadmin-data:/var/lib/pgadmin
+#    depends_on:
+#      - database
+#    networks:
+#      - dev-network
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: "0.2"     # Limita o uso de CPU a 20% de um núcleo
+#          memory: "128M"  # Limita a memória a 128 MB
 
 # VOLUMES
 volumes:
