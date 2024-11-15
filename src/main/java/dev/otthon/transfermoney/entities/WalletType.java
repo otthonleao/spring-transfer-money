@@ -74,5 +74,7 @@ public class WalletType {
         public WalletType get() {
             return new WalletType(id, description);
         }
+
+
     }
 }
