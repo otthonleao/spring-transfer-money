@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.concurrent.CompletableFuture;
+
 @Service
 public class TransferService {
 
@@ -42,6 +44,8 @@ public class TransferService {
         walletRepository.save(sender);
         walletRepository.save(receiver);
         var transferResult = transferRepository.save(transfer);
+
+        CompletableFuture.runAsync(() -> notificationService.sendNotification(transferResult));
 
         return transferResult;
     }
