@@ -5,6 +5,7 @@ import dev.otthon.transfermoney.entities.Transfer;
 import dev.otthon.transfermoney.entities.Wallet;
 import dev.otthon.transfermoney.exceptions.InsufficientBalanceException;
 import dev.otthon.transfermoney.exceptions.TransferNotAllowedForWalletTypeException;
+import dev.otthon.transfermoney.exceptions.TransferNotAuthorizedException;
 import dev.otthon.transfermoney.exceptions.WalletNotFoundException;
 import dev.otthon.transfermoney.repositories.TransferRepository;
 import dev.otthon.transfermoney.repositories.WalletRepository;
@@ -44,6 +45,10 @@ public class TransferService {
 
         if (!sender.isBalancerEqualOrGreaterThan(transferDTO.value())) {
             throw new InsufficientBalanceException();
+        }
+
+        if (!authorizationService.isAuthorized(transferDTO)) {
+            throw new TransferNotAuthorizedException();
         }
     }
 
