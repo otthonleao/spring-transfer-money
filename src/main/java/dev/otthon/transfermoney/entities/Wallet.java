@@ -58,6 +58,10 @@ public class Wallet {
         return this.walletType.equals(WalletType.Enum.CUSTOMER_PF.get());
     }
 
+    public boolean isBalancerEqualOrGreaterThan(BigDecimal value) {
+        return this.balance.doubleValue() >= value.doubleValue();
+    }
+
     public Long getId() {
         return id;
     }

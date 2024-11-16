@@ -3,6 +3,7 @@ package dev.otthon.transfermoney.services;
 import dev.otthon.transfermoney.dtos.TransferDTO;
 import dev.otthon.transfermoney.entities.Transfer;
 import dev.otthon.transfermoney.entities.Wallet;
+import dev.otthon.transfermoney.exceptions.InsufficientBalanceException;
 import dev.otthon.transfermoney.exceptions.TransferNotAllowedForWalletTypeException;
 import dev.otthon.transfermoney.exceptions.WalletNotFoundException;
 import dev.otthon.transfermoney.repositories.TransferRepository;
@@ -39,6 +40,10 @@ public class TransferService {
     private void validateTransfer(TransferDTO transferDTO, Wallet sender) {
         if (!sender.isTransferAllowedForWalletType()) {
             throw new TransferNotAllowedForWalletTypeException();
+        }
+
+        if (!sender.isBalancerEqualOrGreaterThan(transferDTO.value())) {
+            throw new InsufficientBalanceException();
         }
     }
 
