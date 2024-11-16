@@ -1,6 +1,8 @@
 package dev.otthon.transfermoney.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.util.Currency;
@@ -60,6 +62,14 @@ public class Wallet {
 
     public boolean isBalancerEqualOrGreaterThan(BigDecimal value) {
         return this.balance.doubleValue() >= value.doubleValue();
+    }
+
+    public void debit(BigDecimal value) {
+        this.balance = this.balance.min(value);
+    }
+
+    public void credit(BigDecimal value) {
+        this.balance = this.balance.add(value);
     }
 
     public Long getId() {
