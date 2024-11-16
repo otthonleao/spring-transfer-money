@@ -54,6 +54,10 @@ public class Wallet {
         this.walletType = walletType;
     }
 
+    public boolean isTransferAllowedForWalletType() {
+        return this.walletType.equals(WalletType.Enum.CUSTOMER_PF.get());
+    }
+
     public Long getId() {
         return id;
     }
